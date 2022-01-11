@@ -115,20 +115,27 @@ function createFeed(i){
                 </div> 
             </div>            
         </div>
-    `
+    `;
+}
+//for che genera i post
+for (let i = 0; i < posts.length; i++){
+    createFeed(i); 
+    const noProPic = document.querySelectorAll(".post-meta__icon");
+    if(posts[i].author.image == null){
+        let placeholderName = posts[i].author.name.split(" ");
+        //Aggiungiamo la classe dello style di default
+        noProPic[i].classList.add("profile-pic-default");
+        noProPic[i].innerHTML = `<spam>${placeholderName[0].charAt(0)}${placeholderName[1].charAt(0)}`;
+    }
 }
 
-//for che genera i post
-for (let i = 0; i < posts.length; i++) {
-    createFeed(i); 
-}
 
 //variabile bottone like, con querySelectorAll andiamo a creare un array che contiene tutti gli elementi con quella classe
 let addLike = document.querySelectorAll('.js-like-button');
 
-let counter = document.querySelectorAll('.likes__counter');
+let counter = document.querySelectorAll('.js-likes-counter');
 
-for (let i = 0; i < addLike.length; i++) {
+for (let i = 0; i < addLike.length; i++){
     addLike[i].addEventListener('click', function(){
         if(!(this.classList.contains('like-button--liked'))){
             //grazie al this, applichiamo il risvolto della funzione all'elemento interessato dal click
@@ -136,17 +143,13 @@ for (let i = 0; i < addLike.length; i++) {
             //incrementatore di conteggio
             let plusOne = posts[i].likes+1;
             counter[i].innerHTML = `
-                Piace a <b id="like-counter-1" class="js-likes-counter">${plusOne}</b> persone
+                ${plusOne}
             `
         }else if(this.classList.contains('like-button--liked')){
             this.classList.remove('like-button--liked');
             counter[i].innerHTML = `
-                Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
-            s`
+                ${posts[i].likes}
+            `
         }
-    });    
+    });
 }
-
-
-
-
