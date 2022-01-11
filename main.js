@@ -104,7 +104,7 @@ function createFeed(i){
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                        <a class="like-button  js-like-button"  data-postid="1">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -123,5 +123,30 @@ for (let i = 0; i < posts.length; i++) {
     createFeed(i); 
 }
 
-let initials = document.querySelector('.post-meta__icon');
+//variabile bottone like, con querySelectorAll andiamo a creare un array che contiene tutti gli elementi con quella classe
+let addLike = document.querySelectorAll('.js-like-button');
+
+let counter = document.querySelectorAll('.likes__counter');
+
+for (let i = 0; i < addLike.length; i++) {
+    addLike[i].addEventListener('click', function(){
+        if(!(this.classList.contains('like-button--liked'))){
+            //grazie al this, applichiamo il risvolto della funzione all'elemento interessato dal click
+            this.classList.add('like-button--liked');
+            //incrementatore di conteggio
+            let plusOne = posts[i].likes+1;
+            counter[i].innerHTML = `
+                Piace a <b id="like-counter-1" class="js-likes-counter">${plusOne}</b> persone
+            `
+        }else if(this.classList.contains('like-button--liked')){
+            this.classList.remove('like-button--liked');
+            counter[i].innerHTML = `
+                Piace a <b id="like-counter-1" class="js-likes-counter">${posts[i].likes}</b> persone
+            s`
+        }
+    });    
+}
+
+
+
 
