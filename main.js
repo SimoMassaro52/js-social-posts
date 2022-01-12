@@ -104,7 +104,7 @@ function createFeed(i){
             <div class="post__footer">
                 <div class="likes js-likes">
                     <div class="likes__cta">
-                        <a class="like-button  js-like-button"  data-postid="1">
+                        <a class="like-button  js-like-button" data-postid="1">
                             <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
                             <span class="like-button__label">Mi Piace</span>
                         </a>
@@ -117,6 +117,7 @@ function createFeed(i){
         </div>
     `;
 }
+
 //for che genera i post
 for (let i = 0; i < posts.length; i++){
     createFeed(i); 
@@ -138,6 +139,7 @@ let counter = document.querySelectorAll('.js-likes-counter');
 for (let i = 0; i < addLike.length; i++){
     addLike[i].addEventListener('click', function(){
         if(!(this.classList.contains('like-button--liked'))){
+            //this.preventDefault();
             //grazie al this, applichiamo il risvolto della funzione all'elemento interessato dal click
             this.classList.add('like-button--liked');
             //incrementatore di conteggio
